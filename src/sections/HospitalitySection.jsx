@@ -1,6 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
 import SplitWords from "../components/ui/SplitWords.jsx";
-import { gsap, MOTION_OK } from "../motion/gsap.js";
 import eventsImage from "../assets/images/events.jpg";
 import shabbatImage from "../assets/images/shabbat.jpg";
 import deliveryImage from "../assets/images/delivery.jpg";
@@ -45,40 +43,9 @@ const cards = [
   },
 ];
 
-function useCardStack(rootRef) {
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    const mm = gsap.matchMedia(root);
-
-    mm.add(MOTION_OK, () => {
-      const items = gsap.utils.toArray(".hospitality__stack-item", root);
-      items.slice(0, -1).forEach((item, index) => {
-        const next = items[index + 1];
-        const card = item.querySelector(".service-card");
-        const dim = item.querySelector(".service-card__dim");
-        const scrollTrigger = {
-          trigger: next,
-          start: "top bottom",
-          end: () => `top ${parseFloat(getComputedStyle(next).top) || 0}px`,
-          scrub: true,
-          invalidateOnRefresh: true,
-        };
-        gsap.to(card, { scale: 0.92, ease: "none", scrollTrigger });
-        gsap.to(dim, { opacity: 0.6, ease: "none", scrollTrigger: { ...scrollTrigger } });
-      });
-    });
-
-    return () => mm.revert();
-  }, [rootRef]);
-}
-
 export default function HospitalitySection() {
-  const rootRef = useRef(null);
-  useCardStack(rootRef);
-
   return (
     <section
-      ref={rootRef}
       id="services"
       className="hospitality"
       aria-labelledby="hospitality-title"
@@ -99,13 +66,7 @@ export default function HospitalitySection() {
 
         <div className="hospitality__cards">
           {cards.map((card, index) => (
-            <div
-              className="hospitality__stack-item"
-              key={card.title}
-              style={{ "--stack-index": index }}
-            >
-              <ServiceCard index={index} featured={index === 0} {...card} />
-            </div>
+            <ServiceCard key={card.title} index={index} {...card} />
           ))}
         </div>
       </div>

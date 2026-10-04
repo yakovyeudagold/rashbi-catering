@@ -9,22 +9,15 @@ export default function ServiceCard({
   image,
   alt,
   imagePosition,
-  featured = false,
 }) {
   return (
-    <Link
-      to={href}
-      className={`service-card${featured ? " service-card--featured" : ""}`}
-      dir="ltr"
-      data-image-reveal
-    >
+    <Link to={href} className="service-card" dir="ltr" data-image-reveal>
       <img
         src={image}
         alt={alt}
         style={{ objectPosition: imagePosition }}
       />
       <div className="service-card__shade" aria-hidden="true" />
-      <div className="service-card__dim" aria-hidden="true" />
       <div className="service-card__body">
         <span className="service-card__index" aria-hidden="true">
           {String(index + 1).padStart(2, "0")}

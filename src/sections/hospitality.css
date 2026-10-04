@@ -49,42 +49,22 @@
   margin-top: clamp(1.6rem, 5.5vw, 2rem);
 }
 
-.hospitality__stack-item {
-  position: sticky;
-  top: calc(5.25rem + var(--stack-index) * 0.7rem);
-}
-
 .service-card {
   position: relative;
   display: block;
-  min-height: 12.35rem;
+  min-height: 12.75rem;
   overflow: hidden;
   border: 1px solid rgb(190 170 140 / 0.4);
   border-radius: 1.15rem;
   background: #0c0b0a;
   color: inherit;
   text-decoration: none;
-  transform-origin: 50% 0%;
   -webkit-tap-highlight-color: transparent;
-}
-
-.service-card--featured,
-.service-card--featured .service-card__body {
-  min-height: 15rem;
 }
 
 .service-card:focus-visible {
   outline: 1px solid #cbb892;
   outline-offset: 3px;
-}
-
-.service-card__dim {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: #0c0b0a;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .service-card__index {
@@ -123,7 +103,7 @@
   flex-direction: column;
   align-items: flex-start;
   max-width: 74%;
-  min-height: 12.35rem;
+  min-height: 12.75rem;
   padding: 1.15rem 0 1rem 1.1rem;
   text-align: left;
 }
