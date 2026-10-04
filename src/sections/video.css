@@ -1,0 +1,130 @@
+.video-section {
+  background: #0c0b0a;
+  color: #f1ebe3;
+}
+
+.video-section__inner {
+  width: min(100%, 27.5rem);
+  margin-inline: auto;
+  padding:
+    clamp(3rem, 11vw, 4rem)
+    clamp(1rem, 4.6vw, 1.35rem)
+    clamp(2.4rem, 8vw, 3rem);
+  text-align: center;
+}
+
+.video-section__title {
+  margin: 0.8rem 0 0;
+  font-size: clamp(1.9rem, 8.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #f1ebe3;
+}
+
+.video-section__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  margin-top: clamp(1.5rem, 6vw, 2rem);
+  overflow: hidden;
+  border: 1px solid rgb(190 170 140 / 0.3);
+  border-radius: 1.15rem;
+  background: #141210;
+}
+
+.video-section__frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-section__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgb(8 7 6 / 0.72) 100%);
+  pointer-events: none;
+}
+
+.video-section__play {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: max-content;
+  margin-inline: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #f1ebe3;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.video-section__play-ring {
+  display: grid;
+  width: 3.1rem;
+  height: 3.1rem;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e0d4c0 0%, #cbb892 52%, #bda87f 100%);
+  box-shadow: inset 0 1px 0 rgb(255 250 244 / 0.32);
+  color: #241c14;
+}
+
+.video-section__play-ring svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-inline-start: 0.15rem;
+  fill: currentColor;
+}
+
+.video-section__placeholder {
+  aspect-ratio: 4 / 5;
+  align-content: center;
+}
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  padding: 4.5rem 1rem 2rem;
+  background: rgb(8 7 6 / 0.96);
+  animation: page-in 300ms ease-out;
+}
+
+.video-lightbox__player {
+  width: 100%;
+  max-width: 56rem;
+  max-height: 100%;
+  border-radius: 0.9rem;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-lightbox__close {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border: 1px solid rgb(190 170 140 / 0.45);
+  border-radius: 999px;
+  background: transparent;
+  color: #cbb892;
+  cursor: pointer;
+}
+
+.video-lightbox__close svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}

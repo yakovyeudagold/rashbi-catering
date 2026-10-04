@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/*
+  Mobile is the base.
+  Tablet: 48rem (768px), aligned with Tailwind `md`.
+  Desktop: 64rem (1024px), aligned with Tailwind `lg`.
+  Heebo carries the interface. Gveret Levin is only the hero signature line.
+*/
+
+@theme static {
+  --color-bg-primary: #0c0b0a;
+  --color-bg-secondary: #161412;
+  --color-surface: #1e1b18;
+  --color-gold: #c4b39a;
+  --color-gold-light: #ddd2c0;
+  --color-gold-dark: #8f7b62;
+  --color-text-primary: #f4efe6;
+  --color-text-secondary: #c2b8ac;
+  --color-border: rgb(196 179 154 / 0.22);
+  --color-overlay: rgb(8 7 6 / 0.68);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  --shadow-soft: 0 16px 40px rgb(0 0 0 / 0.36);
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --spacing-page-x: 1.25rem;
+  --spacing-section: 4.5rem;
+  --container-content: var(--content-max-width);
+
+  --font-sans: "Heebo", system-ui, sans-serif;
+  --font-script: "Gveret Levin", "Heebo", cursive;
+}
+
+:root {
+  --content-max-width: 72rem;
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  color-scheme: dark;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --spacing-section: 6rem;
+    --spacing-page-x: 2rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --spacing-section: 7.5rem;
+    --spacing-page-x: 2.5rem;
+  }
+}
+
+@layer base {
+  html {
+    margin: 0;
+    overflow-x: clip;
+    background-color: var(--color-bg-primary);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: clip;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    min-height: 100dvh;
+    background-color: var(--color-bg-primary);
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+}
