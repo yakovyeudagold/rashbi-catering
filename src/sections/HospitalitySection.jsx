@@ -45,36 +45,51 @@ const cards = [
   },
 ];
 
-export default function HospitalitySection() {
-  const cardsRef = useRef(null);
-
+function useCardStack(rootRef) {
   useLayoutEffect(() => {
-    const root = cardsRef.current;
+    const root = rootRef.current;
     if (!root) return undefined;
 
     const mm = gsap.matchMedia(root);
 
     mm.add(MOTION_OK, () => {
-      const items = root.querySelectorAll(".service-card");
-      // Subtle staggered cascade entrance. Cards rise + settle from a
-      // slightly reduced scale; they ALWAYS return to an identical resting
-      // state (y:0, scale:1), so all three stay the same size side by side.
-      gsap.from(items, {
-        yPercent: 9,
-        scale: 0.985,
-        transformOrigin: "center 80%",
-        duration: 1.15,
-        ease: "power3.out",
-        stagger: 0.14,
-        scrollTrigger: { trigger: root, start: "top 80%", once: true },
+      const items = gsap.utils.toArray(".hospitality__stack-item", root);
+      items.slice(0, -1).forEach((item, index) => {
+        const next = items[index + 1];
+        const card = item.querySelector(".service-card");
+        const dim = item.querySelector(".service-card__dim");
+        const scrollTrigger = {
+          trigger: next,
+          start: "top bottom",
+          end: () => `top ${parseFloat(getComputedStyle(next).top) || 0}px`,
+          scrub: true,
+          invalidateOnRefresh: true,
+        };
+        // Softer than the original (0.92 / 0.6) so covered cards stay readable.
+        gsap.fromTo(
+          card,
+          { scale: 1 },
+          { scale: 0.96, ease: "none", scrollTrigger },
+        );
+        gsap.fromTo(
+          dim,
+          { opacity: 0 },
+          { opacity: 0.32, ease: "none", scrollTrigger: { ...scrollTrigger } },
+        );
       });
     });
 
     return () => mm.revert();
-  }, []);
+  }, [rootRef]);
+}
+
+export default function HospitalitySection() {
+  const rootRef = useRef(null);
+  useCardStack(rootRef);
 
   return (
     <section
+      ref={rootRef}
       id="services"
       className="hospitality"
       aria-labelledby="hospitality-title"
@@ -93,9 +108,15 @@ export default function HospitalitySection() {
           </p>
         </header>
 
-        <div className="hospitality__cards" ref={cardsRef}>
+        <div className="hospitality__cards">
           {cards.map((card, index) => (
-            <ServiceCard key={card.title} index={index} {...card} />
+            <div
+              className="hospitality__stack-item"
+              key={card.title}
+              style={{ "--stack-index": index }}
+            >
+              <ServiceCard index={index} {...card} />
+            </div>
           ))}
         </div>
       </div>

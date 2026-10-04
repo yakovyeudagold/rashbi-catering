@@ -16,9 +16,9 @@ export default function ServiceCard({
         src={image}
         alt={alt}
         style={{ objectPosition: imagePosition }}
-        data-parallax="6"
       />
       <div className="service-card__shade" aria-hidden="true" />
+      <div className="service-card__dim" aria-hidden="true" />
       <div className="service-card__body">
         <span className="service-card__index" aria-hidden="true">
           {String(index + 1).padStart(2, "0")}
