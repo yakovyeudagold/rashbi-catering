@@ -16,6 +16,7 @@ export default function ServiceCard({
         src={image}
         alt={alt}
         style={{ objectPosition: imagePosition }}
+        data-parallax="6"
       />
       <div className="service-card__shade" aria-hidden="true" />
       <div className="service-card__body">

@@ -1,7 +1,9 @@
+import { useLayoutEffect, useRef } from "react";
 import SplitWords from "../components/ui/SplitWords.jsx";
 import eventsImage from "../assets/images/events.jpg";
 import shabbatImage from "../assets/images/shabbat.jpg";
 import deliveryImage from "../assets/images/delivery.jpg";
+import { gsap, MOTION_OK } from "../motion/gsap.js";
 import ServiceCard from "./ServiceCard.jsx";
 import "./hospitality.css";
 
@@ -44,6 +46,33 @@ const cards = [
 ];
 
 export default function HospitalitySection() {
+  const cardsRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const root = cardsRef.current;
+    if (!root) return undefined;
+
+    const mm = gsap.matchMedia(root);
+
+    mm.add(MOTION_OK, () => {
+      const items = root.querySelectorAll(".service-card");
+      // Subtle staggered cascade entrance. Cards rise + settle from a
+      // slightly reduced scale; they ALWAYS return to an identical resting
+      // state (y:0, scale:1), so all three stay the same size side by side.
+      gsap.from(items, {
+        yPercent: 9,
+        scale: 0.985,
+        transformOrigin: "center 80%",
+        duration: 1.15,
+        ease: "power3.out",
+        stagger: 0.14,
+        scrollTrigger: { trigger: root, start: "top 80%", once: true },
+      });
+    });
+
+    return () => mm.revert();
+  }, []);
+
   return (
     <section
       id="services"
@@ -64,7 +93,7 @@ export default function HospitalitySection() {
           </p>
         </header>
 
-        <div className="hospitality__cards">
+        <div className="hospitality__cards" ref={cardsRef}>
           {cards.map((card, index) => (
             <ServiceCard key={card.title} index={index} {...card} />
           ))}

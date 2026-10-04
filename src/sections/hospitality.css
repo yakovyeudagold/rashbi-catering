@@ -77,10 +77,12 @@
 
 .service-card img {
   position: absolute;
-  inset: 0;
+  inset: -8% 0;
   width: 100%;
-  height: 100%;
+  height: 116%;
+  max-width: none;
   object-fit: cover;
+  will-change: transform;
 }
 
 .service-card__shade {
